@@ -1,5 +1,5 @@
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include <mpi.h>
 
 void printMatrix(double* matrix, int rows, int columns) {
@@ -66,11 +66,11 @@ void multiplyMatrices(double* matrix1, double* matrix2, double* mul, int size1, 
     int *count_2, *displs_2, *count_mul, *displs_mul, *block_lengths;
 
     // array of data-types
-    MPI_Datatype types[3] {MPI_DOUBLE, MPI_UB};
+    MPI_Datatype types[3] = {MPI_DOUBLE, MPI_UB, MPI_UB};
 
     if (grid_rank == 0) {
         // displacements
-        MPI_Aint displs[2]{0, (MPI_Aint) (sizeof(double) * sub_sizes[1])};
+        MPI_Aint displs[2] = {0, (MPI_Aint) (sizeof(double) * sub_sizes[1])};
 
         // init
         displs_2 = (int*) malloc(sizeof(int) * p[1]);
